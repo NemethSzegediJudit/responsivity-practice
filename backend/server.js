@@ -63,37 +63,37 @@ const server = http.createServer((req, res) => {
 	</html>
 	
 	`;
-    
+
 	let filePath = path.resolve(__dirname + '/../frontend' + req.url);
-    
+
 	fs.access(filePath, fs.constants.R_OK, (err) => {
-	if(err){
-		res.statusCode = 404;
-		res.end(errorHTML);
-	}else{
-		if(fs.statSync(filePath).isDirectory()) {
-			filePath += '/index.html';
-		}
-		fs.readFile(filePath, "binary", (err, data) => {
-			if(err) {
-				res.statusCode = 500;
-				res.end(errorHTML);
-			} else {
-				const mediaType = mediaTypes[filePath.split('.').pop()];
-      
-				if (!mediaType) {
-					mediaType = 'text/plain';
-				}
-				res.writeHead(200, { "Content-Type": mediaType });
-				res.write(data, "binary");
-				res.end();
+		if (err) {
+			res.statusCode = 404;
+			res.end(errorHTML);
+		} else {
+			if (fs.statSync(filePath).isDirectory()) {
+				filePath += '/index.html';
 			}
-		});
-	}
+			fs.readFile(filePath, "binary", (err, data) => {
+				if (err) {
+					res.statusCode = 500;
+					res.end(errorHTML);
+				} else {
+					let mediaType = mediaTypes[filePath.split('.').pop()];
+
+					if (!mediaType) {
+						mediaType = 'text/plain';
+					}
+					res.writeHead(200, { "Content-Type": mediaType });
+					res.write(data, "binary");
+					res.end();
+				}
+			});
+		}
 	});
 });
 
 server.listen(9000, "127.0.0.1", () => {
-    const addr = server.address();
-		console.log(`http://${addr.address}:${addr.port}`);
+	const addr = server.address();
+	console.log(`http://${addr.address}:${addr.port}`);
 });

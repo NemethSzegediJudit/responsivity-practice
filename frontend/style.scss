@@ -1,0 +1,79 @@
+//ebbe sima css-t is tudunk írni, de nem ismeri fel a böngésző. Ezt átkonvertálja nekünk a vs code sima css-sé.
+//akkor tudjuk, hogy működik, hogy lent kiírja, hogy "Watching"
+
+header {
+    position: fixed;
+    width: 100%;
+    height: 60px;
+    z-index: 10;
+    background-color: #ffffff;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    font-size: 600;
+    font-weight: 400;
+}
+
+#root {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    section {
+        position: relative;
+        min-height: 100vh;
+
+        padding: 80px 20px 0;
+
+        background-color: #f2f2f2;
+        border-bottom: 4px solid #ffffff;
+
+        h2 {
+            color: darkcyan;
+
+            @media (max-width: 400px) {
+                font-size: 25px;
+
+                span {
+                    color: crimson;
+                }
+            }
+
+            @media (min-width: 401px) and (max-width: 800px) {
+                font-size: 50px;
+
+                span {
+                    color: darkorange;
+                }
+            }
+
+            @media (min-width: 801px) {
+                font-size: 100px
+            }
+        }
+
+        button {
+            position: absolute;
+            width: calc(100% - 80px);
+            max-width: 400px;
+            height: 60px;
+
+            margin: 40px;
+            right: 0;
+            bottom: 0;
+
+            background-color: #000000;
+            color: #ffffff
+        }
+    }
+}
+
+footer {
+    min-height: 400px;
+}
+
+//nem ajánlja Richárd az em és rem használatát margin és padding esetében. a margin és paddig meghatározásánál pixelt használjunk, a font-size-nál is, és csak a line-height-nél használjunk em-et
+//font méretnél semmiképp ne csináljunk vh-t és vw-t
+
+//16px az, ami jól olvasható folyószövegként minden képernyőn. 
